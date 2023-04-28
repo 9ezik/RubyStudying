@@ -1,9 +1,14 @@
+require_relative '../queries/speciality_query'
 class SpecialitiesController < ApplicationController
   before_action :set_speciality, only: %i[ show edit update destroy ]
 
   # GET /specialities or /specialities.json
   def index
-    @specialities = Speciality.all.page(params[:page])
+    if params[:name]
+      @specialities = SpecialityQuery.new(params[:name]).call.page(params[:page])
+    else
+      @specialities = Speciality.all.page(params[:page])
+    end
   end
 
   # GET /specialities/1 or /specialities/1.json

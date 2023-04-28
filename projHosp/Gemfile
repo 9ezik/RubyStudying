@@ -72,3 +72,11 @@ group :test do
 end
 
 gem 'kaminari'
+
+gem 'devise', '~> 4.9', '>= 4.9.2'
+
+gem 'nokogiri'
+
+gem 'openssl'
+
+gem 'open-uri'

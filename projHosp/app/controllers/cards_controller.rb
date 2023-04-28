@@ -1,9 +1,14 @@
+require_relative '../queries/card_query'
 class CardsController < ApplicationController
   before_action :set_card, only: %i[ show edit update destroy ]
 
   # GET /cards or /cards.json
   def index
-    @cards = Card.all.page(params[:page])
+    if params[:street] || params[:dateB] || params[:hospital_id]
+      @cards = CardQuery.new(params[:street], params[:dateB], params[:hospital_id]).call.page(params[:page])
+    else
+      @cards = Card.all.page(params[:page])
+    end
   end
 
   # GET /cards/1 or /cards/1.json

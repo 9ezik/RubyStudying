@@ -26,6 +26,13 @@
         <li class="nav-item"><a href="/patients" class="nav-link">Patients</a></li>
         <li class="nav-item"><a href="/doctors" class="nav-link">Doctors</a></li>
         <li class="nav-item"><a href="/specialities" class="nav-link">Specialities</a></li>
+        <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to "Sing out", destroy_user_session_path, method: :delete, class:"nav-link"%></li>
+          <li class="nav-item"><%= link_to "Edit profile", edit_user_registration_path, class:"nav-link" %></li>
+        <% else %>
+          <li class="nav-item"><%= link_to "Sign up", new_user_registration_path, class:"nav-link" %></li>
+          <li class="nav-item"><%= link_to "Sing in", new_user_session_path, class:"nav-link" %></li>
+        <% end %>
       </ul>
     </header>
   </div>

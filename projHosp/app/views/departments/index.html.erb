@@ -2,6 +2,24 @@
 
 <h1>Departments</h1>
 
+<h3>Search department by:</h3>
+
+<%= form_tag(departments_path, method: :get) do %>
+  <%= label_tag(:name, "Name:") %>
+  <%= text_field_tag(:name) %>
+
+  <%= label_tag(:address, "Address:") %>
+  <%= text_field_tag(:address) %>
+
+  <%= label_tag(:phone, "Phone:") %>
+  <%= text_field_tag(:phone) %>
+
+  <%= label_tag(:hospital_id, "Hospital id:") %>
+  <%= text_field_tag(:hospital_id) %>
+
+  <%= submit_tag("Search") %>
+<% end %>
+
 <div id="departments">
   <%= link_to "New department", new_department_path %>
   <table class="table table-striped table-hover">

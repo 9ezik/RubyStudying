@@ -1,9 +1,14 @@
+require_relative '../queries/doctor_query'
 class DoctorsController < ApplicationController
   before_action :set_doctor, only: %i[ show edit update destroy ]
 
   # GET /doctors or /doctors.json
   def index
-    @doctors = Doctor.all.page(params[:page])
+    if params[:name] || params[:email] || params[:phone] || params[:department_id] || params[:speciality_id]
+      @doctors = DoctorQuery.new(params[:name], params[:email], params[:phone], params[:department_id], params[:speciality_id]).call.page(params[:page])
+    else
+      @doctors = Doctor.all.page(params[:page])
+    end
   end
 
   # GET /doctors/1 or /doctors/1.json

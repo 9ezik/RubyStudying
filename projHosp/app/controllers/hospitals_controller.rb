@@ -1,9 +1,14 @@
+require_relative '../queries/hospital_query'
 class HospitalsController < ApplicationController
   before_action :set_hospital, only: %i[ show edit update destroy ]
 
   # GET /hospitals or /hospitals.json
   def index
-    @hospitals = Hospital.all.page(params[:page])
+    if params[:name] || params[:address] || params[:phone] || params[:street]
+      @hospitals = HospitalQuery.new(params[:name], params[:address], params[:phone], params[:street]).call.page(params[:page])
+    else
+      @hospitals = Hospital.all.page(params[:page])
+    end
   end
 
   # GET /hospitals/1 or /hospitals/1.json

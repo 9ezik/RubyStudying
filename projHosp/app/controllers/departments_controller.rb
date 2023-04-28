@@ -1,9 +1,14 @@
+require_relative '../queries/department_query'
 class DepartmentsController < ApplicationController
   before_action :set_department, only: %i[ show edit update destroy ]
 
   # GET /departments or /departments.json
   def index
-    @departments = Department.all.page(params[:page])
+    if params[:name] || params[:address] || params[:phone] || params[:hospital_id]
+      @departments = DepartmentQuery.new(params[:name], params[:address], params[:phone], params[:hospital_id]).call.page(params[:page])
+    else
+      @departments = Department.all.page(params[:page])
+    end
   end
 
   # GET /departments/1 or /departments/1.json

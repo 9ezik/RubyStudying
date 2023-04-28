@@ -1,9 +1,14 @@
+require_relative '../queries/patient_query'
 class PatientsController < ApplicationController
   before_action :set_patient, only: %i[ show edit update destroy ]
 
   # GET /patients or /patients.json
   def index
-    @patients = Patient.all.page(params[:page])
+    if params[:name] || params[:card_id]
+      @patients = PatientQuery.new(params[:name], params[:card_id]).call.page(params[:page])
+    else
+      @patients = Patient.all.page(params[:page])
+    end
   end
 
   # GET /patients/1 or /patients/1.json
