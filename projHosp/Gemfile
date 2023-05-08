@@ -80,3 +80,9 @@ gem 'nokogiri'
 gem 'openssl'
 
 gem 'open-uri'
+
+gem 'prawn'
+
+gem 'prawn-table'
+
+gem 'csv'
