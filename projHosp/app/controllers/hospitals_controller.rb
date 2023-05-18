@@ -30,6 +30,7 @@ class HospitalsController < ApplicationController
 
     respond_to do |format|
       if @hospital.save
+        @hospital.avatar.attach(params[:avatar]) if params[:avatar].present?
         format.html { redirect_to hospital_url(@hospital), notice: "Hospital was successfully created." }
         format.json { render :show, status: :created, location: @hospital }
       else
@@ -70,6 +71,6 @@ class HospitalsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def hospital_params
-      params.require(:hospital).permit(:name, :address, :phone, :street)
+      params.require(:hospital).permit(:name, :address, :phone, :street, :avatar)
     end
 end

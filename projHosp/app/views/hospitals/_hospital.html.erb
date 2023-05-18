@@ -19,4 +19,10 @@
     <%= hospital.street %>
   </p>
 
+  <% if hospital.avatar.attached? %>
+    <%= image_tag hospital.avatar %>
+  <% else %>
+    <p>No avatar available.</p>
+  <% end %>
+
 </div>

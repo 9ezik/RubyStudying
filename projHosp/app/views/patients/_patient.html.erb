@@ -9,4 +9,10 @@
     <%= patient.card_id %>
   </p>
 
+  <% if patient.avatar.attached? %>
+    <%= image_tag patient.avatar %>
+  <% else %>
+    <p>No avatar available.</p>
+  <% end %>
+
 </div>
